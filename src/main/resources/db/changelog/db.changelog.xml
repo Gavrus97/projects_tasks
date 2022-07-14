@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1" author="Wlad">
+
+        <createTable tableName="project">
+            <column name="project_id" type="bigint" autoIncrement="true">
+                <constraints unique="true" nullable="false" primaryKey="true" deleteCascade="true"/>
+            </column>
+            <column name="project_name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="created_on" type="datetime"/>
+            <column name="updated_on" type="datetime"/>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="2" author="Wlad">
+        <createTable tableName="task">
+
+            <column name="task_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+
+            <column name="task_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="days_to_complete" type="number"/>
+
+            <column name="progress_type" type="number">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"
+                             referencedTableName="project"
+                             referencedColumnNames="project_id"
+                             foreignKeyName="TASK_PROJECT_ID_PROJECT_PROJECT_ID"
+                />
+            </column>
+            <column name="created_on" type="datetime" />
+
+            <column name="updated_on" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Wlad">
+        <createIndex tableName="task" indexName="TASK_NAME_INDEX">
+            <column name="task_name"/>
+        </createIndex>
+    </changeSet>
+
+
+</databaseChangeLog>
