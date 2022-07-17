@@ -16,4 +16,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findAllByTaskName(String name);
 
     List<Task> findAllByProgressTypeAndUpdatedOnIsBefore(ProgressType type, LocalDateTime date);
+
+    List<Task> findAllByProgressType(ProgressType type);
 }

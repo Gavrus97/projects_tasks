@@ -57,13 +57,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponseDTO getById(Long id) {
-        if (id == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Id cannot be null!"
-            );
-        }
-
         Project project = repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
